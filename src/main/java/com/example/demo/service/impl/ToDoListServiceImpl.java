@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.model.entity.ToDoListData;
 import com.example.demo.service.CommonService;
 import com.example.demo.service.ToDoListService;
 import org.json.simple.JSONObject;
@@ -8,7 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ToDoListServiceImpl extends CommonService implements ToDoListService {
     @Override
-    public void addList(JSONObject json) throws Exception {
+    public boolean insertTodoData(String work) throws Exception {
+        return true;
+    }
 
+    @Override
+    public ToDoListData getTodoData(int seq) throws Exception {
+        return null;
     }
 }

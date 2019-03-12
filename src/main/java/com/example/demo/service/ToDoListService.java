@@ -1,7 +1,8 @@
 package com.example.demo.service;
 
-import org.json.simple.JSONObject;
+import com.example.demo.model.entity.ToDoListData;
 
 public interface ToDoListService {
-    public void addList(JSONObject json) throws Exception;
+    public boolean insertTodoData(String work) throws Exception;
+    public ToDoListData getTodoData(int seq) throws Exception;
 }
