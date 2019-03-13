@@ -13,9 +13,13 @@ public class TodoRefData {
 
     @Basic
     @Column(name = "TODO_ID")
-    private int todoId;
+    private int toDoId;
 
     @Basic
     @Column(name = "REF_ID")
     private int refId;
+
+    @Basic
+    @Column(name = "TODO_YN")
+    private String toDoYn;
 }
