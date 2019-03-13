@@ -1,9 +1,7 @@
 package com.example.demo.model.entity;
 
 import lombok.Data;
-
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 @Entity
 @Data
@@ -16,20 +14,16 @@ public class ToDoListData {
     private Integer rowId;
 
     @Basic
-    @Column(name = "todo")
-    private String todo;
+    @Column(name = "TODO")
+    private String toDo;
 
     @Basic
     @Column(name = "REG_DATE")
-    private Timestamp regDate;
+    private String regDate;
 
     @Basic
     @Column(name = "MOD_DATE")
-    private Timestamp modDate;
-
-    @Basic
-    @Column(name = "END_DATE")
-    private Timestamp endDate;
+    private String modDate;
 
     @Basic
     @Column(name = "END_YN")
