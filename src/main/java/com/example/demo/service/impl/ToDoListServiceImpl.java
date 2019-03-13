@@ -89,11 +89,13 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
         try {
             ToDoListData toDoListData = toDoListRepo.findByRowId(seq);
             if (toDoListData != null) {
-                toDoListData.setToDo(toDo);
-                toDoListData.setModDate(StringUtil.getCurrentDateTime());
-                if(!endYn.equals("")){
+                if(!toDo.equals("")){
+                    toDoListData.setToDo(toDo);
+                }
+                if(endYn.equals("Y") && isCompleteTodoIds(seq)){
                     toDoListData.setEndYn(endYn);
                 }
+                toDoListData.setModDate(StringUtil.getCurrentDateTime());
                 toDoListRepo.save(toDoListData);
             }
         } catch (Exception ex) {
@@ -116,5 +118,16 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
             throw ex;
         }
         return resArray;
+    }
+
+    private boolean isCompleteTodoIds(int refId){
+
+        List<TodoRefData> todoRefDataList = toDoRefRepo.findByRefId(refId);
+        for(TodoRefData todoRefData : todoRefDataList){
+            if(todoRefData.getToDoYn().equals("N")){
+                return false;
+            }
+        }
+        return true;
     }
 }
