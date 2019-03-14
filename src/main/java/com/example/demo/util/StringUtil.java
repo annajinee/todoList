@@ -1,5 +1,6 @@
 package com.example.demo.util;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Component;
 
@@ -29,13 +30,6 @@ public class StringUtil {
             return str;
     }
 
-    public static int parseInt(String str) {
-        try {
-            return Integer.parseInt(str);
-        } catch (Exception ex) {
-            return -1;
-        }
-    }
 
     public static String getCurrentDateTime() {
         long time = System.currentTimeMillis();
