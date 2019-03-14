@@ -29,5 +29,8 @@ public class ToDoListData {
     @Column(name = "END_YN")
     private String endYn;
 
+    @Basic
+    @Column(name = "REF_IDS")
+    private String refIds;
 
 }

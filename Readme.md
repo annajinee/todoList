@@ -66,7 +66,7 @@
 - example
 
   ```
-  http://localhost:8081/todo/list/1/2
+  http://localhost:8081/todo/list/0/2
   ```
 
 [Response]
@@ -83,14 +83,16 @@
             "toDo": "청소하기",
             "regDate": "2019-03-14 17:23:44",
             "modDate": "2019-03-14 17:23:44",
-            "endYn": "N"
+            "endYn": "N",
+            "refIds": "null"
         },
         {
             "rowId": 2,
             "toDo": "빨래하기",
             "regDate": "2019-03-14 16:36:44",
             "modDate": "2019-03-14 16:36:44",
-            "endYn": "N"
+            "endYn": "N",
+            "refIds": "[1]"
         }
     ],
     "pageInfo": {
@@ -143,14 +145,8 @@
         "toDo": "물 주기",
         "regDate": "2019-03-14 16:24:47",
         "modDate": "2019-03-14 16:24:47",
-        "endYn": "N"
-    },
-    "refIds": [
-	        1,
-	        3,
-	        4,
-	        5
-	    ]
+        "endYn": "N",
+        "refIds": "[1,9]"
     }
   ```
 
