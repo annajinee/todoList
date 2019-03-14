@@ -38,6 +38,7 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
             toDoListData.setRegDate(StringUtil.getCurrentDateTime());
             toDoListData.setModDate(StringUtil.getCurrentDateTime());
             toDoListData.setEndYn("N");
+            toDoListData.setRefIds(refIdArry.toString());
             toDoListRepo.save(toDoListData);
 
             if(refIdArry.size()>0){
@@ -58,18 +59,16 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
     }
 
     @Override
-    public TodoListResult getTodoData(int seq) throws Exception {
+    public ToDoListData getTodoData(int seq) throws Exception {
 
-        TodoListResult todoListResult = new TodoListResult();
+        ToDoListData toDoListData = new ToDoListData();
         try {
-            ToDoListData toDoListData = toDoListRepo.findByRowId(seq);
-            todoListResult.setToDoListData(toDoListData);
-            todoListResult.setRefIds(getTodoRefIds(toDoListData.getRowId()));
+            toDoListData = toDoListRepo.findByRowId(seq);;
         } catch (Exception ex) {
             logger.error(ex.toString());
             throw ex;
         }
-        return todoListResult;
+        return toDoListData;
     }
 
     @Override
