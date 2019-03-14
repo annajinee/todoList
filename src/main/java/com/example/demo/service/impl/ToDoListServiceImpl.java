@@ -19,21 +19,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 @Service
 public class ToDoListServiceImpl extends CommonService implements ToDoListService {
 
-    private final ToDoListRepo toDoListRepo;
-    private final ToDoRefRepo toDoRefRepo;
-
     @Autowired
-    public ToDoListServiceImpl(ToDoRefRepo toDoRefRepo, ToDoListRepo toDoListRepo) {
-        this.toDoRefRepo = toDoRefRepo;
-        this.toDoListRepo = toDoListRepo;
-    }
-
+    private ToDoListRepo toDoListRepo;
+    @Autowired
+    private ToDoRefRepo toDoRefRepo;
 
     @Override
-    public boolean insertTodoData(String toDo, String refId) throws Exception {
+    public boolean insertTodoData(String toDo, JSONArray refIdArry) throws Exception {
 
         try {
             ToDoListData toDoListData = new ToDoListData();
@@ -42,6 +39,17 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
             toDoListData.setModDate(StringUtil.getCurrentDateTime());
             toDoListData.setEndYn("N");
             toDoListRepo.save(toDoListData);
+
+            if(refIdArry.size()>0){
+                TodoRefData todoRefData = new TodoRefData();
+                for(int i=0; i<refIdArry.size(); i++){
+                todoRefData.setToDoId(toDoListRepo.getRowId());
+                todoRefData.setRefId(Integer.parseInt(String.valueOf(refIdArry.get(i))));
+                todoRefData.setToDoYn("N");
+                toDoRefRepo.save(todoRefData);
+                }
+            }
+
         } catch (Exception ex) {
             logger.error(ex.toString());
             throw ex;
@@ -109,7 +117,7 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
     private JSONArray getTodoRefIds(int toDoId) {
         JSONArray resArray = new JSONArray();
         try {
-            List<TodoRefData> todoRefDataList = toDoRefRepo.findByTodoId(toDoId);
+            List<TodoRefData> todoRefDataList = toDoRefRepo.findByToDoId(toDoId);
             for (TodoRefData todoRefData : todoRefDataList) {
                 resArray.add(todoRefData.getRefId());
             }
