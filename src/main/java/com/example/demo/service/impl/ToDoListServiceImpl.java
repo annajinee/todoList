@@ -38,16 +38,15 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
             toDoListData.setRegDate(StringUtil.getCurrentDateTime());
             toDoListData.setModDate(StringUtil.getCurrentDateTime());
             toDoListData.setEndYn("N");
-            toDoListData.setRefIds(refIdArry.toString());
             toDoListRepo.save(toDoListData);
 
             if(refIdArry.size()>0){
                 TodoRefData todoRefData = new TodoRefData();
                 for(int i=0; i<refIdArry.size(); i++){
-                todoRefData.setToDoId(toDoListRepo.getRowId());
-                todoRefData.setRefId(Integer.parseInt(String.valueOf(refIdArry.get(i))));
-                todoRefData.setToDoYn("N");
-                toDoRefRepo.save(todoRefData);
+                    todoRefData.setToDoId(toDoListRepo.getRowId());
+                    todoRefData.setRefId(Integer.parseInt(String.valueOf(refIdArry.get(i))));
+                    todoRefData.setToDoYn("N");
+                    toDoRefRepo.save(todoRefData);
                 }
             }
 
@@ -63,7 +62,7 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
 
         ToDoListData toDoListData = new ToDoListData();
         try {
-            toDoListData = toDoListRepo.findByRowId(seq);;
+            toDoListData = toDoListRepo.findByRowId(seq);
         } catch (Exception ex) {
             logger.error(ex.toString());
             throw ex;
@@ -110,21 +109,6 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
             throw ex;
         }
         return true;
-    }
-
-
-    private JSONArray getTodoRefIds(int toDoId) {
-        JSONArray resArray = new JSONArray();
-        try {
-            List<TodoRefData> todoRefDataList = toDoRefRepo.findByToDoId(toDoId);
-            for (TodoRefData todoRefData : todoRefDataList) {
-                resArray.add(todoRefData.getRefId());
-            }
-        } catch (Exception ex) {
-            logger.error(ex.toString());
-            throw ex;
-        }
-        return resArray;
     }
 
     private boolean isCompleteTodoIds(int refId){

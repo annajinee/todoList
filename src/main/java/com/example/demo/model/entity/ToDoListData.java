@@ -2,6 +2,7 @@ package com.example.demo.model.entity;
 
 import lombok.Data;
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Data
@@ -29,8 +30,8 @@ public class ToDoListData {
     @Column(name = "END_YN")
     private String endYn;
 
-    @Basic
-    @Column(name = "REF_IDS")
-    private String refIds;
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="TODO_ID")
+    private Collection<TodoRefData> refData;
 
 }

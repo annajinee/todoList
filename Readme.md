@@ -66,7 +66,7 @@
 - example
 
   ```
-  http://localhost:8081/todo/list/0/2
+  http://localhost:8081/todo/list/0/5
   ```
 
 [Response]
@@ -79,27 +79,78 @@
   {
     "dataList": [
         {
-            "rowId": 1,
-            "toDo": "청소하기",
-            "regDate": "2019-03-14 17:23:44",
-            "modDate": "2019-03-14 17:23:44",
+            "rowId": 5,
+            "toDo": "바람쐬기",
+            "regDate": "2019-03-14 19:29:42",
+            "modDate": "2019-03-14 19:29:42",
             "endYn": "N",
-            "refIds": "null"
+            "refData": [
+                {
+                    "toDoId": 5,
+                    "refId": 1,
+                    "toDoYn": "N"
+                },
+                {
+                    "toDoId": 5,
+                    "refId": 2,
+                    "toDoYn": "N"
+                },
+                {
+                    "toDoId": 5,
+                    "refId": 3,
+                    "toDoYn": "N"
+                }
+            ]
+        },
+        {
+            "rowId": 4,
+            "toDo": "청소하기",
+            "regDate": "2019-03-14 19:29:31",
+            "modDate": "2019-03-14 19:29:31",
+            "endYn": "N",
+            "refData": []
+        },
+        {
+            "rowId": 3,
+            "toDo": "청소하기",
+            "regDate": "2019-03-14 19:29:19",
+            "modDate": "2019-03-14 19:29:19",
+            "endYn": "N",
+            "refData": []
         },
         {
             "rowId": 2,
-            "toDo": "빨래하기",
-            "regDate": "2019-03-14 16:36:44",
-            "modDate": "2019-03-14 16:36:44",
+            "toDo": "청소하기",
+            "regDate": "2019-03-14 19:29:16",
+            "modDate": "2019-03-14 19:29:16",
             "endYn": "N",
-            "refIds": "[1]"
+            "refData": []
+        },
+        {
+            "rowId": 1,
+            "toDo": "안녕",
+            "regDate": "2019-03-14 19:24:16",
+            "modDate": "2019-03-14 19:24:16",
+            "endYn": "N",
+            "refData": [
+                {
+                    "toDoId": 1,
+                    "refId": 1,
+                    "toDoYn": "N"
+                },
+                {
+                    "toDoId": 1,
+                    "refId": 9,
+                    "toDoYn": "N"
+                }
+            ]
         }
     ],
     "pageInfo": {
-        "totalCount": 15,
-        "totalPage": 8
+        "totalCount": 5,
+        "totalPage": 1
     }
-  }
+   }
   ```
 
 - 실패
@@ -129,7 +180,7 @@
 - example
 
   ```
-  http://localhost:8081/api/todo/41
+  http://localhost:8081/api/todo/1
   ```
 
 [Response]
@@ -140,14 +191,24 @@
 
   ``` json
   {
-    "toDoListData": {
-        "rowId": 41,
-        "toDo": "물 주기",
-        "regDate": "2019-03-14 16:24:47",
-        "modDate": "2019-03-14 16:24:47",
-        "endYn": "N",
-        "refIds": "[1,9]"
-    }
+    "rowId": 1,
+    "toDo": "화분에 물 주기",
+    "regDate": "2019-03-14 19:24:16",
+    "modDate": "2019-03-14 19:24:16",
+    "endYn": "N",
+    "refData": [
+        {
+            "toDoId": 1,
+            "refId": 1,
+            "toDoYn": "N"
+        },
+        {
+            "toDoId": 1,
+            "refId": 9,
+            "toDoYn": "N"
+        }
+    ]
+  }
   ```
 
 - 실패
