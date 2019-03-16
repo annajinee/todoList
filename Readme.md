@@ -248,9 +248,7 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 
 | name       | type| desc         | 필수 값 |
 | ---------- |  -----| ------------ | ---- |
-| seq       | int | 조회 row id | Y    |
-| toDo		| string | 할 일 | Y    |
-| endYn		| string | 완료 값 | Y    |
+| seq       | int | 수정할 row id | Y    |
 
 - example
 
@@ -258,6 +256,26 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
   http://localhost:8081/api/todo/1
   ```
 
+	
+| name       | type| desc         | 필수 값 |
+| ---------- |  -----| ------------ | ---- |
+| toDo		| string | 할 일 | N    |
+| endYn		| string | 완료 값 | N    |
+
+
+* 할 일 수정 시
+  ```json
+  {
+	"toDo":"화분에 물주기"
+	}
+  ```
+ 
+ * 완료 상태 값 추정 시	
+	  ```json
+	  {
+		"endYn":'Y'
+		}
+	  ```
 [Response]
 
 - example
