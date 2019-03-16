@@ -1,11 +1,44 @@
-##  Todo List BackEnd API 명세 
+#  Todo List BackEnd 
 
 ​
 
 
+[todoList-FrontEnd](https://github.com/annajinee/todoList-frontEnd) 프로젝트에서 요청 되는 Todo List Backend API입니다.
+  
+빌드는 maven을  사용하고 있습니다. 아래 명령어로 todoList 폴더 내에서 컴파일 하고
+
+    mvn complie
+todoList/target 폴더에 demo0.0.1-SNAPSHOT.jar 생성 확인 후 아래 명령어로 실행합니다.
+
+    java -jar demo0.0.1-SNAPSHOT.jar
 
 
+<br>
 
+##  데이터 구조 
+H2 DB콘솔 : http://localhost:8080/h2-console/
+
+테이블은 주 테이블인 **TODO_LIST**와 참조관계를 확인하는 테이블인  **TODO_REF** 로 구성되어 있습니다. 
+
+<br>
+
+##### TODO_LIST
+<img src="http://drive.google.com/uc?export=view&id=1gTrVCiwUqPmvy_YCQZBtTsofz8Fbp6Vs">
+
+##### TODO_REF
+<img src="http://drive.google.com/uc?export=view&id=1X9KIGqv_yxugoLY7cv61DZREfVpU7XO7" style width="200px">
+
+<br>
+
+**TODO_REF** 테이블의 TODO_ID는 FK로 **TODO_LIST**테이블의 ROWID를 참조 하여 참조 데이터 리스트를 가져 옵니다. 
+
+<img src="http://drive.google.com/uc?export=view&id=1xVOitMO9l3keyZ5-rMby--W2DJF9WAW4">
+(@OneToMany 어노테이션을 이용)
+
+<br>
+<br>
+
+## API 명세
 
 #### 1.1 할 일 등록
 
@@ -148,7 +181,8 @@
     ],
     "pageInfo": {
         "totalCount": 5,
-        "totalPage": 1
+        "totalPage": 1,
+        "pageNumber":0
     }
    }
   ```
