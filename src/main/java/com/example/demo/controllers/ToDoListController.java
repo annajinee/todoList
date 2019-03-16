@@ -18,13 +18,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/todo")
 public class ToDoListController extends CommonController {
 
+    private final ToDoListService toDoListService;
+
     @Autowired
-    private ToDoListService toDoListService;
+    public ToDoListController(ToDoListService toDoListService) {
+        this.toDoListService = toDoListService;
+    }
 
 
     @RequestMapping(value = "/list/{position}/{size}", method = RequestMethod.GET)
     public ResponseEntity<?> getTodoList(@PathVariable int position, @PathVariable int size) throws Exception {
-
         try {
             return new ResponseEntity<>(toDoListService.getTodoDataList(position, size), HttpStatus.OK);
 
@@ -37,7 +40,6 @@ public class ToDoListController extends CommonController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> addTodo(@RequestBody String payload) throws Exception {
-
         JSONObject reqObj = new JSONObject();
         JSONParser parser = new JSONParser();
 
@@ -46,12 +48,11 @@ public class ToDoListController extends CommonController {
             reqObj = (JSONObject) obj;
 
             String toDo = StringUtil.getJsonValue(reqObj, "toDo", "");
-            if(StringUtil.IsNullOrEmpty(toDo).equals("")){
+            if (StringUtil.IsNullOrEmpty(toDo).equals("")) {
                 return invalidParameterResponse("toDo");
             }
 
-            JSONArray refId = (JSONArray)reqObj.get("refId");
-
+            JSONArray refId = (JSONArray) reqObj.get("refId");
             if (toDoListService.insertTodoData(toDo, refId))
                 return new ResponseEntity<>("정상 등록", HttpStatus.OK);
             else
@@ -86,16 +87,17 @@ public class ToDoListController extends CommonController {
             reqObj = (JSONObject) obj;
 
             String toDo = StringUtil.getJsonValue(reqObj, "toDo", "");
-            if (toDo.equals("")) {
-                return invalidParameterResponse("toDo");
-            }
             String endYn = StringUtil.getJsonValue(reqObj, "endYn", "");
 
             return new ResponseEntity<>(toDoListService.updateTodoData(seq, toDo, endYn), HttpStatus.OK);
 
+        } catch (UnsupportedOperationException ex) {
+            return Response.getResult("참조된 일이 완료되지 않음", ErrorCode.NOT_COMPLETE, HttpStatus.NOT_MODIFIED);
+
         } catch (Exception ex) {
             logger.error(ex.toString());
             return Response.getResult("서버오류", ErrorCode.UNKNOWN_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
+
         }
     }
 

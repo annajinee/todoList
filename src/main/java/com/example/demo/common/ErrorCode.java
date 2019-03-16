@@ -6,7 +6,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum ErrorCode {
     NOTFOUND(1001),
     INVALID_PARAMETER(1002),
-    UNKNOWN_ERROR(1003);
+    UNKNOWN_ERROR(1003),
+    NOT_COMPLETE(1004);
 
     private int errorCode;
 
