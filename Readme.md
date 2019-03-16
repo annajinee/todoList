@@ -32,8 +32,16 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 
 **TODO_REF** 테이블의 TODO_ID는 FK로 **TODO_LIST**테이블의 ROWID를 참조 하여 참조 데이터 리스트를 가져 옵니다. 
 
-<img src="http://drive.google.com/uc?export=view&id=1xVOitMO9l3keyZ5-rMby--W2DJF9WAW4" style width="400">
-(@OneToMany)
+<br>
+
+
+
+문제 해결 전략
+- 
+- 주 테이블과 참조 테이블간의 OneToMany 관계 설정으로 조인하여 참조 데이터 가져옴
+- JSON Object 형태로 데이터 전달 
+- 참조 데이터의 경우 JSON Object 내 JSON Array 형태로 전달
+- 완료 처리 시 참조테이블 내 해당 아이디의 참조 걸린 아이디들의 완료 여부 확인 후 완료 되지 않았을 경우 throw 처리 
 
 <br>
 <br>
@@ -199,17 +207,19 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 
 <br>
 
-#### 1.3 할 일 조회
+#### 1.3 할 일 및 완료 상태 값 수정 
 
 [Request]
 
 - path : {host}/api/todo/{seq}
-- method : GET
+- method : PUT
 - parameter
 
 | name       | type| desc         | 필수 값 |
 | ---------- |  -----| ------------ | ---- |
 | seq       | int | 조회 row id | Y    |
+| toDo		| string | 할 일 | Y    |
+| endYn		| string | 완료 값 | Y    |
 
 - example
 
@@ -222,36 +232,15 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 - example
 
   성공 :
-
-  ``` json
-  {
-    "rowId": 1,
-    "toDo": "화분에 물 주기",
-    "regDate": "2019-03-14 19:24:16",
-    "modDate": "2019-03-14 19:24:16",
-    "endYn": "N",
-    "refData": [
-        {
-            "toDoId": 1,
-            "refId": 1,
-            "toDoYn": "N"
-        },
-        {
-            "toDoId": 1,
-            "refId": 9,
-            "toDoYn": "N"
-        }
-    ]
-  }
-  ```
+http status : 200
 
 - 실패
 
   ```json
   {
-    "status": "INTERNAL_SERVER_ERROR",
-    "message": "Not found",
-    "errorCode": 1001
+    "status": "NOT_MODIFIED",
+    "message": "참조된 일이 완료되지 않음",
+    "errorCode": 1004
    }
   ```
 
