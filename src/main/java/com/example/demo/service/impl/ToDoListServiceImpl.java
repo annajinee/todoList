@@ -102,7 +102,7 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
                 }
                 if(endYn.equals("Y") && isCompleteToDoIds(seq)){
                     toDoListData.setEndYn(endYn);
-                } else {
+                } else if(endYn.equals("Y") && !isCompleteToDoIds(seq)){
                     throw new UnsupportedOperationException("Not Complete referenced tasks");
                 }
                 toDoListData.setModDate(StringUtil.getCurrentDateTime());
