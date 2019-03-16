@@ -23,17 +23,17 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 <br>
 
 ##### TODO_LIST
-<img src="http://drive.google.com/uc?export=view&id=1gTrVCiwUqPmvy_YCQZBtTsofz8Fbp6Vs">
+<img src="http://drive.google.com/uc?export=view&id=1gTrVCiwUqPmvy_YCQZBtTsofz8Fbp6Vs" style width="400">
 
 ##### TODO_REF
-<img src="http://drive.google.com/uc?export=view&id=1X9KIGqv_yxugoLY7cv61DZREfVpU7XO7" style width="200px">
+<img src="http://drive.google.com/uc?export=view&id=1X9KIGqv_yxugoLY7cv61DZREfVpU7XO7" style width="180">
 
 <br>
 
 **TODO_REF** 테이블의 TODO_ID는 FK로 **TODO_LIST**테이블의 ROWID를 참조 하여 참조 데이터 리스트를 가져 옵니다. 
 
-<img src="http://drive.google.com/uc?export=view&id=1xVOitMO9l3keyZ5-rMby--W2DJF9WAW4">
-(@OneToMany 어노테이션을 이용)
+<img src="http://drive.google.com/uc?export=view&id=1xVOitMO9l3keyZ5-rMby--W2DJF9WAW4" style width="400">
+(@OneToMany)
 
 <br>
 <br>
