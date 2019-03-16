@@ -4,7 +4,6 @@ import com.example.demo.model.dao.ToDoListRepo;
 import com.example.demo.model.dao.ToDoRefRepo;
 import com.example.demo.model.dto.PageInfo;
 import com.example.demo.model.dto.TodoListPageResult;
-import com.example.demo.model.dto.TodoListResult;
 import com.example.demo.model.entity.ToDoListData;
 import com.example.demo.model.entity.TodoRefData;
 import com.example.demo.service.CommonService;
@@ -19,15 +18,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 
 @Service
 public class ToDoListServiceImpl extends CommonService implements ToDoListService {
 
+    private final ToDoListRepo toDoListRepo;
+    private final ToDoRefRepo toDoRefRepo;
+
     @Autowired
-    private ToDoListRepo toDoListRepo;
-    @Autowired
-    private ToDoRefRepo toDoRefRepo;
+    public ToDoListServiceImpl(ToDoListRepo toDoListRepo, ToDoRefRepo toDoRefRepo) {
+        this.toDoListRepo = toDoListRepo;
+        this.toDoRefRepo = toDoRefRepo;
+    }
 
     @Override
     public boolean insertTodoData(String toDo, JSONArray refIdArry) throws Exception {
@@ -42,9 +44,9 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
 
             if(refIdArry.size()>0){
                 TodoRefData todoRefData = new TodoRefData();
-                for(int i=0; i<refIdArry.size(); i++){
+                for (Object refId : refIdArry) {
                     todoRefData.setToDoId(toDoListRepo.getRowId());
-                    todoRefData.setRefId(Integer.parseInt(String.valueOf(refIdArry.get(i))));
+                    todoRefData.setRefId(Integer.parseInt(String.valueOf(refId)));
                     todoRefData.setToDoYn("N");
                     toDoRefRepo.save(todoRefData);
                 }
@@ -74,19 +76,19 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
     public TodoListPageResult getTodoDataList(int position, int size) throws Exception {
         TodoListPageResult todoListResult = new TodoListPageResult();
         try {
-            Pageable pageable = new PageRequest(position, size, Sort.Direction.DESC, "rowId");
+            Pageable pageable = new PageRequest(position, size, Sort.Direction.ASC, "rowId");
             Page<ToDoListData> page = toDoListRepo.findAll(pageable);
             todoListResult.setDataList(page.getContent());
             PageInfo pageInfo = new PageInfo();
             pageInfo.setTotalCount(page.getTotalElements());
             pageInfo.setTotalPage(page.getTotalPages());
+            pageInfo.setPageNumber(page.getNumber());
             todoListResult.setPageInfo(pageInfo);
         } catch (Exception ex) {
             logger.error(ex.toString());
             throw ex;
         }
         return todoListResult;
-
     }
 
     @Override
@@ -98,8 +100,10 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
                 if(!toDo.equals("")){
                     toDoListData.setToDo(toDo);
                 }
-                if(endYn.equals("Y") && isCompleteTodoIds(seq)){
+                if(endYn.equals("Y") && isCompleteToDoIds(seq)){
                     toDoListData.setEndYn(endYn);
+                } else {
+                    throw new UnsupportedOperationException("Not Complete referenced tasks");
                 }
                 toDoListData.setModDate(StringUtil.getCurrentDateTime());
                 toDoListRepo.save(toDoListData);
@@ -111,7 +115,7 @@ public class ToDoListServiceImpl extends CommonService implements ToDoListServic
         return true;
     }
 
-    private boolean isCompleteTodoIds(int refId){
+    private boolean isCompleteToDoIds(int refId){
 
         List<TodoRefData> todoRefDataList = toDoRefRepo.findByRefId(refId);
         for(TodoRefData todoRefData : todoRefDataList){

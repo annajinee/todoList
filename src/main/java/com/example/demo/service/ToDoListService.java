@@ -1,7 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.model.dto.TodoListPageResult;
-import com.example.demo.model.dto.TodoListResult;
 import com.example.demo.model.entity.ToDoListData;
 import org.json.simple.JSONArray;
 

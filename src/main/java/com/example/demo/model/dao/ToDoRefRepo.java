@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface ToDoRefRepo extends JpaRepository<TodoRefData, Integer> {
     public List<TodoRefData> findByRefId(int refId);
-
 }
