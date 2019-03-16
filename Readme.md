@@ -5,7 +5,7 @@
 
 [todoList-FrontEnd](https://github.com/annajinee/todoList-frontEnd) 프로젝트에서 요청 되는 Todo List Backend API입니다.
   
-빌드는 maven을  사용하고 있습니다. 아래 명령어로 todoList 폴더 내에서 컴파일 하고
+빌드는 maven을  사용하고 있습니다. 아래 명령어로 todoList 폴더 내에서 컴파일 후
 
     mvn complie
 todoList/target 폴더에 demo0.0.1-SNAPSHOT.jar 생성 확인 후 아래 명령어로 실행합니다.
@@ -82,10 +82,39 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 - 실패
 
   ```json
-  {
-    "status": "INTERNAL_SERVER_ERROR",
-    "message": "Invalid Parameter : toDo",
-    "errorCode": 1002
+	 {
+    "timestamp": "2019-03-16T22:14:50.061+0000",
+    "status": 400,
+    "error": "Bad Request",
+    "errors": [
+        {
+            "codes": [
+                "NotNull.toDoAddPayload.toDo",
+                "NotNull.toDo",
+                "NotNull.java.lang.String",
+                "NotNull"
+            ],
+            "arguments": [
+                {
+                    "codes": [
+                        "toDoAddPayload.toDo",
+                        "toDo"
+                    ],
+                    "arguments": null,
+                    "defaultMessage": "toDo",
+                    "code": "toDo"
+                }
+            ],
+            "defaultMessage": "Invalid Parameter - toDo",
+            "objectName": "toDoAddPayload",
+            "field": "toDo",
+            "rejectedValue": null,
+            "bindingFailure": false,
+            "code": "NotNull"
+        }
+    ],
+    "message": "Validation failed for object='toDoAddPayload'. Error count: 1",
+    "path": "/todo"
     }
   ```
 
@@ -199,10 +228,12 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 
   ```json
   {
-    "status": "INTERNAL_SERVER_ERROR",
-    "message": "서버오류",
-    "errorCode": 1001
-   }
+    "timestamp": "2019-03-16T22:17:14.240+0000",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: \"1r0\"",
+    "path": "/todo/list/0/1r0"
+    }
   ```
 
 <br>
@@ -232,15 +263,16 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 - example
 
   성공 :
-http status : 200
+  ```json
+  true
+  ```
 
 - 실패
 
   ```json
   {
     "status": "NOT_MODIFIED",
-    "message": "참조된 일이 완료되지 않음",
-    "errorCode": 1004
+    "message": "참조된 일이 완료되지 않음"
    }
   ```
 
