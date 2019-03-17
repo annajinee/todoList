@@ -13,8 +13,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -157,12 +156,13 @@ public class ToDoListControllerTest extends MockMvcTest {
 
         String inputJson = super.mapToJson(toDoUpdatePayload);
 
-        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(toDoUri + "/0")
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(toDoUri + "/1")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(inputJson)).andReturn();
+                .content(inputJson))
+                .andExpect(status().isOk())
+                .andReturn();
 
         int status = mvcResult.getResponse().getStatus();
-        assertEquals(200, status);
         String content = mvcResult.getResponse().getContentAsString();
         assertEquals(content, "true");
     }
@@ -181,6 +181,21 @@ public class ToDoListControllerTest extends MockMvcTest {
                 .andExpect(status().isNotFound())
                 .andReturn();
 
+    }
+
+    @Test
+    public void update_NotComplete() throws Exception {
+
+        ToDoUpdatePayload toDoUpdatePayload = new ToDoUpdatePayload();
+        toDoUpdatePayload.setEndYn("Y");
+
+        String inputJson = super.mapToJson(toDoUpdatePayload);
+
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(toDoUri + "/3")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(inputJson))
+                .andExpect(status().isNotModified())
+                .andReturn();
     }
 
 }
