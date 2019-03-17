@@ -35,8 +35,8 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 <br>
 
 **TODO_REF** 테이블의 TODO_ID는 FK로 **TODO_LIST**테이블의 ROWID를 참조 하여 참조 데이터 리스트를 가져 옵니다. 
-
-<img src ="http://drive.google.com/uc?export=view&id=1-cE1azomPrcWDPh6Uyk86OjkQcnjLvgd" style width="500">
+(ROWID가 4일 경우 TODO_REF테이블의 TODO_ID가 4인 값들 가져옴)
+<img src ="http://drive.google.com/uc?export=view&id=1-cE1azomPrcWDPh6Uyk86OjkQcnjLvgd" style width="700">
 
 <br>
 
