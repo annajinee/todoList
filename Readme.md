@@ -5,7 +5,7 @@
 
 [todoList-FrontEnd](https://github.com/annajinee/todoList-frontEnd) 프로젝트에서 요청 되는 Todo List Backend API입니다.
   
-빌드는 maven을  사용하고 있습니다. 아래 명령어로 todoList 폴더 내에서  후
+빌드는 maven을  사용하고 있습니다. 아래 명령어로 todoList 폴더 내에서 패키징 후
    
     컴파일 : mvn compile
     패키징 : mvn package
