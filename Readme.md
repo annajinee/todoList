@@ -19,7 +19,9 @@ TodoList/target/ 폴더에 todolist-0.0.1-SNAPSHOT.jar 생성 확인 후 아래 
 
 ##  데이터 구조 
 H2 DB콘솔 : http://localhost:8080/h2-console/
-
+userName : user
+Passward : test!
+<img src="http://drive.google.com/uc?export=view&id=1x3_LEpKq1W5p9_2-Ythb-Tg8FT0aYqFR" style width="400">
 테이블은 주 테이블인 **TODO_LIST**와 참조관계를 확인하는 테이블인  **TODO_REF** 로 구성되어 있습니다. 
 
 <br>
