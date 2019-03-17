@@ -6,11 +6,13 @@
 [todoList-FrontEnd](https://github.com/annajinee/todoList-frontEnd) 프로젝트에서 요청 되는 Todo List Backend API입니다.
   
 빌드는 maven을  사용하고 있습니다. 아래 명령어로 todoList 폴더 내에서 컴파일 후
+   
+    컴파일 : mvn compile
+    패키징 : mvn package
+    
+TodoList/target/ 폴더에 todolist-0.0.1-SNAPSHOT.jar 생성 확인 후 아래 명령어로 실행합니다.
 
-    mvn complie
-todoList/target 폴더에 demo0.0.1-SNAPSHOT.jar 생성 확인 후 아래 명령어로 실행합니다.
-
-    java -jar demo0.0.1-SNAPSHOT.jar
+    java -jar todolist-0.0.1-SNAPSHOT.jar
 
 
 <br>
