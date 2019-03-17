@@ -12,7 +12,7 @@
     
 TodoList/target/ 폴더에 todolist-0.0.1-SNAPSHOT.jar 생성 확인 후 아래 명령어로 실행합니다.
 
-    java -jar todolist-0.0.1-SNAPSHOT.jar
+    실행 : java -jar todolist-0.0.1-SNAPSHOT.jar
 
 
 <br>
