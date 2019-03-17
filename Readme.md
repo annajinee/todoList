@@ -42,7 +42,7 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 
 <br>
 
-완료여부 수정 시 TODO_REF테이블에서 REF_ID로 조회 하여 완료 상태인지를 체크 합니다. (ToDoListServiceImpl.class)
+완료여부 수정 시 TODO_REF테이블에서 REF_ID로 조회 하여 수정 할 데이터가 참조된 데이터들의 완료 상태를 확인합니다. (ToDoListServiceImpl.java)
 
     private boolean isCompleteToDoIds(int refId) {
 
