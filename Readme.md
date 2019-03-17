@@ -40,10 +40,9 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 <br>
 <img src ="http://drive.google.com/uc?export=view&id=1-cE1azomPrcWDPh6Uyk86OjkQcnjLvgd" style width="700">
 
-<br>
 
-완료여부 수정 시 TODO_REF테이블에서 REF_ID로 조회 하여 수정 할 데이터가 참조된 데이터들의 완료 상태를 확인합니다. 
-- ROWID가 1인 할 데이터를 완료하려면 1을 참조건 데이터들의 완료여부를 확인하기 위하여 TODO_REF의 REF_ID가 1인 TODO_YN을 확인 
+완료여부 수정 시 TODO_REF테이블에서 REF_ID로 조회 하여 참조된 데이터들의 완료 상태를 확인합니다. 
+- ROWID가 1인 할 데이터를 완료하려면 1을 참조건 데이터들의 완료여부를 확인하기 위하여 TODO_REF의 REF_ID가 1인 TODO_YN을 확인 (@2, @3, @7의 상태값)
 
 <img src ="http://drive.google.com/uc?export=view&id=12prh53EUM_l68za4zBdFBNcyIh4WBJJI" stayle width="180">
 
