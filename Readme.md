@@ -52,7 +52,7 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 문제 해결 전략
 - 
 - 주 테이블과 참조 테이블간의 OneToMany 관계 설정으로 참조 데이터들을 가져옴
-- 완료 여부 확인 시 참조테이블의 REF_ID로 조회하여 TODO_ID의 완료여부 확인 (TODO_YN)
+- 참조 걸린 데이터들의 완료 여부 확인 시 참조테이블에서 REF_ID로 조회하여 TODO_ID의 완료여부 확인 (TODO_YN)
 - JSON Object 형태로 데이터 전달 
 - 참조 데이터의 경우 JSON Object 내 JSON Array 형태로 전달
 - 완료 처리 시 참조테이블 내 해당 아이디의 참조 걸린 아이디들의 완료 여부 확인 후 완료 되지 않았을 경우 throw 처리 
