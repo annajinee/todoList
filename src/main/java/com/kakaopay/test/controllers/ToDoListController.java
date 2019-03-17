@@ -6,6 +6,7 @@ import com.kakaopay.test.common.Response;
 import com.kakaopay.test.model.dto.ToDoAddPayload;
 import com.kakaopay.test.model.dto.ToDoUpdatePayload;;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ public class ToDoListController {
         this.toDoListService = toDoListService;
     }
 
+
     @GetMapping(value = "/list/{position}/{size}")
     public ResponseEntity<?> getTodoList(@PathVariable int position, @PathVariable int size) throws Exception {
         try {
@@ -34,6 +36,7 @@ public class ToDoListController {
             return Response.getResult("서버오류", HttpStatus.BAD_REQUEST);
         }
     }
+
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> addTodo(@RequestBody @Valid ToDoAddPayload toDoAddPayload) throws Exception {
@@ -51,8 +54,8 @@ public class ToDoListController {
 
 
     @PutMapping(value = "/{seq}")
-    public ResponseEntity<?> updateTodo(@PathVariable int seq, @RequestBody @Valid ToDoUpdatePayload toDoUpdatePayload) throws Exception {
-
+    public ResponseEntity<?> updateTodo(@PathVariable int seq, @RequestBody ToDoUpdatePayload toDoUpdatePayload) throws Exception {
+        System.out.println(toDoUpdatePayload.toString());
         try {
             return ResponseEntity.ok(toDoListService.updateTodoData(seq, toDoUpdatePayload.getToDo(), toDoUpdatePayload.getEndYn()));
 

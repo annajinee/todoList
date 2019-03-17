@@ -58,5 +58,19 @@ public class ToDoListControllerTest extends AbstractTest {
         String content = mvcResult.getResponse().getContentAsString();
         assertEquals(content, "정상 등록");
     }
+    @Test
+    public void updateTodo() throws Exception {
+    String uri = toDoUri +"/1";
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+                .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+        System.out.println(mvcResult);
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200, status);
+        String content = mvcResult.getResponse().getContentAsString();
+        TodoListPageResult[] todoListPageResults = super.mapFromJson(content, TodoListPageResult[].class);
+        assertTrue(todoListPageResults.length > 0);
+
+    }
+
 
 }

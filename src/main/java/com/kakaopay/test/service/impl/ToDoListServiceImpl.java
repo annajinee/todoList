@@ -83,12 +83,12 @@ public class ToDoListServiceImpl implements ToDoListService {
         try {
             ToDoListData toDoListData = toDoListRepo.findByRowId(seq);
             if (toDoListData != null) {
-                if(!toDo.equals("")){
+                if(toDo != null){
                     toDoListData.setToDo(toDo);
                 }
-                if(endYn.equals("Y") && isCompleteToDoIds(seq)){
+                if(endYn !=null && endYn.equals("Y") && isCompleteToDoIds(seq)){
                     toDoListData.setEndYn(endYn);
-                } else if(endYn.equals("Y") && !isCompleteToDoIds(seq)){
+                } else if(endYn !=null && endYn.equals("Y") && !isCompleteToDoIds(seq)){
                     throw new UnsupportedOperationException("Not Complete referenced tasks");
                 }
                 toDoListData.setModDate(StringUtil.getCurrentDateTime());
