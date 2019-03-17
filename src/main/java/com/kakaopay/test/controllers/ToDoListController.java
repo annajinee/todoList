@@ -62,6 +62,9 @@ public class ToDoListController {
         } catch (UnsupportedOperationException ex) {
             return Response.getResult("참조된 일이 완료되지 않음", HttpStatus.NOT_MODIFIED);
 
+        } catch (NullPointerException ex) {
+            return Response.getResult("해당 아이디 정보없음", HttpStatus.NOT_FOUND);
+
         } catch (Exception ex) {
             log.error(ex.toString());
             return Response.getResult("서버오류", HttpStatus.BAD_REQUEST);

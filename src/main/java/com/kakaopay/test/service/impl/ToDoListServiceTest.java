@@ -12,7 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+
 import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -41,7 +43,7 @@ public class ToDoListServiceTest implements ToDoListService {
             toDoListData.setEndYn("N");
             toDoListRepo.save(toDoListData);
 
-            if(refIdArry.size()>0){
+            if (refIdArry.size() > 0) {
                 TodoRefData todoRefData = new TodoRefData();
                 for (Object refId : refIdArry) {
                     todoRefData.setToDoId(toDoListRepo.getRowId());
@@ -82,18 +84,20 @@ public class ToDoListServiceTest implements ToDoListService {
 
         try {
             ToDoListData toDoListData = toDoListRepo.findByRowId(seq);
-            if (toDoListData != null) {
-                if(toDo != null){
-                    toDoListData.setToDo(toDo);
-                }
-                if(endYn !=null && endYn.equals("Y") && isCompleteToDoIds(seq)){
-                    toDoListData.setEndYn(endYn);
-                } else if(endYn !=null && endYn.equals("Y") && !isCompleteToDoIds(seq)){
-                    throw new UnsupportedOperationException("Not Complete referenced tasks");
-                }
-                toDoListData.setModDate(StringUtil.getCurrentDateTime());
-                toDoListRepo.save(toDoListData);
+            if (toDoListData == null) {
+                throw new NullPointerException("Not Found");
             }
+            if (toDo != null) {
+                toDoListData.setToDo(toDo);
+            }
+            if (endYn != null && endYn.equals("Y") && isCompleteToDoIds(seq)) {
+                toDoListData.setEndYn(endYn);
+            } else if (endYn != null && endYn.equals("Y") && !isCompleteToDoIds(seq)) {
+                throw new UnsupportedOperationException("Not Complete referenced tasks");
+            }
+            toDoListData.setModDate(StringUtil.getCurrentDateTime());
+            toDoListRepo.save(toDoListData);
+
         } catch (Exception ex) {
             log.error(ex.toString());
             throw ex;
@@ -101,11 +105,11 @@ public class ToDoListServiceTest implements ToDoListService {
         return true;
     }
 
-    private boolean isCompleteToDoIds(int refId){
+    private boolean isCompleteToDoIds(int refId) {
 
         List<TodoRefData> todoRefDataList = toDoRefRepo.findByRefId(refId);
-        for(TodoRefData todoRefData : todoRefDataList){
-            if(todoRefData.getToDoYn().equals("N")){
+        for (TodoRefData todoRefData : todoRefDataList) {
+            if (todoRefData.getToDoYn().equals("N")) {
                 return false;
             }
         }
