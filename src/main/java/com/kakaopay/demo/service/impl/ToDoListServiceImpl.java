@@ -22,13 +22,13 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class ToDoListServiceTest implements ToDoListService {
+public class ToDoListServiceImpl implements ToDoListService {
 
     private final ToDoListRepo toDoListRepo;
     private final ToDoRefRepo toDoRefRepo;
 
     @Autowired
-    public ToDoListServiceTest(ToDoListRepo toDoListRepo, ToDoRefRepo toDoRefRepo) {
+    public ToDoListServiceImpl(ToDoListRepo toDoListRepo, ToDoRefRepo toDoRefRepo) {
         this.toDoListRepo = toDoListRepo;
         this.toDoRefRepo = toDoRefRepo;
     }
