@@ -36,12 +36,28 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 
 **TODO_REF** 테이블의 TODO_ID는 FK로 **TODO_LIST**테이블의 ROWID를 참조 하여 참조된 일들을 가져 옵니다. 
 
+<br>)
+(ROWID가 4일 경우, TODO_REF에서 TODO_ID가 4인 데이터들을 가져옴 (@1, @2, @3, @5)
+
 <br>
 <img src ="http://drive.google.com/uc?export=view&id=1-cE1azomPrcWDPh6Uyk86OjkQcnjLvgd" style width="700">
 
 <br>
 
+완료여부 수정 시 TODO_REF테이블에서 REF_ID로 조회 하여 완료 상태인지를 체크 합니다. 
 
+    private boolean isCompleteToDoIds(int refId) {
+
+        List<TodoRefData> todoRefDataList = toDoRefRepo.findByRefId(refId);
+        for (TodoRefData todoRefData : todoRefDataList) {
+            if (todoRefData.getToDoYn().equals("N")) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+<br>
 
 문제 해결 전략
 - 
