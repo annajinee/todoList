@@ -47,20 +47,6 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 
 <img src ="http://drive.google.com/uc?export=view&id=12prh53EUM_l68za4zBdFBNcyIh4WBJJI" stayle width="180">
 
-
-(ToDoListServiceImpl.java)
-
-    private boolean isCompleteToDoIds(int refId) {
-
-        List<TodoRefData> todoRefDataList = toDoRefRepo.findByRefId(refId);
-        for (TodoRefData todoRefData : todoRefDataList) {
-            if (todoRefData.getToDoYn().equals("N")) {
-                return false;
-            }
-        }
-        return true;
-    }
-    
 <br>
 
 문제 해결 전략
