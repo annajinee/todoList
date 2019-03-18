@@ -144,8 +144,8 @@ H2 DB콘솔 : http://localhost:8080/h2-console/
 
 | name       | type| desc         | 필수 값 |
 | ---------- |  -----| ------------ | ---- |
-| seq       | int | 조회 row id | Y    |
-| seq       | int | 조회 row id | Y    |
+| position       | int | 페이징 위치 | Y    |
+| size       | int | 페이징 사이즈 | Y    |
 
 - example
 
