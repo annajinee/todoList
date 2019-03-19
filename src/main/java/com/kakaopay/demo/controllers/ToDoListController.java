@@ -38,7 +38,7 @@ public class ToDoListController {
     }
 
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     public ResponseEntity<?> addTodo(@RequestBody @Valid ToDoAddPayload toDoAddPayload) throws Exception {
 
         try {
